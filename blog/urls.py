@@ -4,6 +4,10 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.bosh_sahifa, name='bosh_sahifa'),
@@ -23,6 +27,12 @@ urlpatterns = [
     path('profil/<str:username>/', views.profil_sahifasi, name='profil_sahifasi'),
     path('parol-ozgartirish/', views.parol_ozgartirish, name='parol_ozgartirish'),
     path('kategoriya/<int:id>/', views.kategoriya_postlari, name='kategoriya_postlari'),
+    path('profil/<str:username>/', views.profil, name='profil'),
+    path('profil/tahrirlash/', views.profil_tahrirlash, name='profil_tahrirlash'),
+
    
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

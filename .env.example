@@ -1,0 +1,8 @@
+SECRET_KEY='vt8*$)pb&dowvz&#4jgjp9t$czuc+f-t$egnu)#e84j$njwvp1'
+DEBUG=True
+DB_NAME=blog_db
+DB_USER=postgress
+DB_PASSWORD=12345678
+DB_HOST=localhost
+DB_PORT=5432
+ALLOWED_HOSTS=localhost,127.0.0.1

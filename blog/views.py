@@ -16,12 +16,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.db.models import Q
+from django.contrib.auth.models import User
+from .models import Post, Profil
+from .forms import FoydalanuvchiYangilashForma, ProfilYangilashForma
+from django.core.paginator import Paginator
 
 def bosh_sahifa(request):
-    postlar = Post.objects.filter(nashr_etilgan=True).order_by('-yaratilgan_sana')
+    postlar_list = Post.objects.select_related('muallif').filter(
+        nashr_etilgan=True
+    ).order_by('-yaratilgan_sana')
+    paginator = Paginator(postlar_list, 5)
 
-    context = {'postlar': postlar}
-    return render(request, 'blog/bosh.html', context)
+    sahifa_raqami = request.GET.get('sahifa')
+    postlar = paginator.get_page(sahifa_raqami)
+
+    return render(request, 'blog/bosh.html', {'postlar': postlar})
 
 def biz_haqimizda(request):  # ← Yangi
     return render(request, 'blog/biz_haqimizda.html')
@@ -82,10 +91,10 @@ def draft_postlar(request):
 @login_required
 def post_yaratish(request):
     if request.method == 'POST':
-        forma = PostForma(request.POST)
+        forma = PostForma(request.POST, request.FILES)  # request.FILES qo'shildi!
         if forma.is_valid():
             post = forma.save(commit=False)
-            post.muallif = request.user  
+            post.muallif = request.user
             post.save()
             messages.success(request, '✅ Post yaratildi!')
             return redirect('bosh_sahifa')
@@ -198,3 +207,40 @@ def kategoriya_postlari(request, id):
         'kategoriya': kategoriya,
         'postlar': postlar
     })
+
+@login_required
+def profil(request, username):
+    foydalanuvchi = get_object_or_404(User, username=username)
+    postlar = Post.objects.filter(muallif=foydalanuvchi, nashr_etilgan=True).order_by('-yaratilgan_sana')
+    profil_obj = get_object_or_404(Profil, foydalanuvchi=foydalanuvchi) 
+
+    context = {
+        'profil_egasi': foydalanuvchi,
+        'profil': profil_obj,
+        'postlar': postlar,
+        'postlar_soni': postlar.count()
+    }
+    return render(request, 'blog/profil.html', context)
+
+
+
+@login_required
+def profil_tahrirlash(request):
+    if request.method == 'POST':
+        f_forma = FoydalanuvchiYangilashForma(request.POST, instance=request.user)
+        p_forma = ProfilYangilashForma(request.POST, request.FILES, instance=request.user.profil)
+
+        if f_forma.is_valid() and p_forma.is_valid():
+            f_forma.save()
+            p_forma.save()
+            messages.success(request, '✅ Profilingiz yangilandi!')
+            return redirect('profil', username=request.user.username)
+    else:
+        f_forma = FoydalanuvchiYangilashForma(instance=request.user)
+        p_forma = ProfilYangilashForma(instance=request.user.profil)
+
+    context = {
+        'f_forma': f_forma,
+        'p_forma': p_forma
+    }
+    return render(request, 'blog/profil_tahrirlash.html', context)

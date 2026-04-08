@@ -1,24 +1,29 @@
-
 from django.contrib import admin
-from .models import Post, Izoh   # 🔥 Izohni ham qo‘shamiz
+from .models import Post, Izoh, Profil, Kategoriya
 
+# ====== Izoh Inline ======
+class IzohInline(admin.TabularInline):
+    model = Izoh
+    extra = 1
+
+# ====== PostAdmin ======
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('sarlavha', 'muallif', 'yaratilgan_sana', 'nashr_etilgan')
     list_filter = ('nashr_etilgan', 'yaratilgan_sana')
     search_fields = ('sarlavha', 'matn')
     date_hierarchy = 'yaratilgan_sana'
+    inlines = [IzohInline]   # Izoh inline qo‘shildi
 
-admin.site.register(Post, PostAdmin)
+# ====== ProfilAdmin ======
+@admin.register(Profil)
+class ProfilAdmin(admin.ModelAdmin):
+    list_display = ('foydalanuvchi', 'tugilgan_sana')
+    search_fields = ('foydalanuvchi__username',)
 
-class IzohInline(admin.TabularInline):
-    model = Izoh
-    extra = 1
+admin.site.register(Kategoriya)
 
-class PostAdmin(admin.ModelAdmin):
-    inlines = [IzohInline]
 
 admin.site.register(Izoh)
 
-from .models import Post, Kategoriya
 
-admin.site.register(Kategoriya)

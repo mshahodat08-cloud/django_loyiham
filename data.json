@@ -1,0 +1,670 @@
+[
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-04-08T10:39:10.147Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Yashamoq",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"izoh\", \"object\": \"shahodat - cccccccccc\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-04-08T10:39:31.213Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "Binafsha shu'lasi1",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-04-08T10:39:50.826Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "Mukashaffatul qulub",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-04-08T10:40:16.054Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "Odam bo'lish qiyin",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 4,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 5,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 6,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add kategoriya",
+        "content_type": 7,
+        "codename": "add_kategoriya"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change kategoriya",
+        "content_type": 7,
+        "codename": "change_kategoriya"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete kategoriya",
+        "content_type": 7,
+        "codename": "delete_kategoriya"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view kategoriya",
+        "content_type": 7,
+        "codename": "view_kategoriya"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add post",
+        "content_type": 8,
+        "codename": "add_post"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change post",
+        "content_type": 8,
+        "codename": "change_post"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete post",
+        "content_type": 8,
+        "codename": "delete_post"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view post",
+        "content_type": 8,
+        "codename": "view_post"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add izoh",
+        "content_type": 9,
+        "codename": "add_izoh"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change izoh",
+        "content_type": 9,
+        "codename": "change_izoh"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete izoh",
+        "content_type": 9,
+        "codename": "delete_izoh"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view izoh",
+        "content_type": 9,
+        "codename": "view_izoh"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add post rasm",
+        "content_type": 10,
+        "codename": "add_postrasm"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change post rasm",
+        "content_type": 10,
+        "codename": "change_postrasm"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete post rasm",
+        "content_type": 10,
+        "codename": "delete_postrasm"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view post rasm",
+        "content_type": 10,
+        "codename": "view_postrasm"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add profil",
+        "content_type": 11,
+        "codename": "add_profil"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change profil",
+        "content_type": 11,
+        "codename": "change_profil"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete profil",
+        "content_type": 11,
+        "codename": "delete_profil"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view profil",
+        "content_type": 11,
+        "codename": "view_profil"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$vGZitzePx8EYzVyG2sAwa5$0jFeJ4nDa+P6PNekdEf6gSBYY79SRylUZU6smcKW+xY=",
+        "last_login": "2026-04-08T10:34:44.676Z",
+        "is_superuser": false,
+        "username": "shahodat",
+        "first_name": "",
+        "last_name": "",
+        "email": "shakhodat2008@icloud.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-04-08T10:34:43.825Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$7DRGORVYZFOckSfzgpfnvh$OtfwEXUVoxoX/T2E9vpjhqaXPp+tBRlptqWsLlHhduk=",
+        "last_login": "2026-04-08T10:37:48.185Z",
+        "is_superuser": true,
+        "username": "shaxodat",
+        "first_name": "",
+        "last_name": "",
+        "email": "shaxodat@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-04-08T10:37:12.950Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "blog",
+        "model": "kategoriya"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "blog",
+        "model": "post"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "blog",
+        "model": "izoh"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "blog",
+        "model": "postrasm"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "blog",
+        "model": "profil"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "f9wezqavbf1znre0s34krsyqd5hmibdq",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2pAiUhiX7j0DmWEGqRpISrsy3l2bdKHb_977LxVxXUpcu8xxYnVWR3X43QjTQ-oG-I711nRqdZkn0puid9r1tbE8L7v7d1Cwl28dcCCDxFZ84JEhsEc6iUnoRyYgB0lsRkssHkiQHYM1SbIBzEN26v0BJic56w:1wAQI8:5yf8vTkyMS3-HqGkQc84r_ZGBdDrJwYlqOtw1ZpCoHw",
+        "expire_date": "2026-04-22T10:37:48.192Z"
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 1,
+    "fields": {
+        "sarlavha": "Yashamoq",
+        "matn": "ccccccccc",
+        "muallif": 2,
+        "rasm": "",
+        "yaratilgan_sana": "2026-04-08T10:39:10.141Z",
+        "yangilangan_sana": "2026-04-08T10:39:10.141Z",
+        "nashr_etilgan": true,
+        "korildi": 0
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 2,
+    "fields": {
+        "sarlavha": "Binafsha shu'lasi1",
+        "matn": "sssssssssss",
+        "muallif": 2,
+        "rasm": "",
+        "yaratilgan_sana": "2026-04-08T10:39:31.209Z",
+        "yangilangan_sana": "2026-04-08T10:39:31.211Z",
+        "nashr_etilgan": true,
+        "korildi": 0
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 3,
+    "fields": {
+        "sarlavha": "Mukashaffatul qulub",
+        "matn": "aaaaaaaaaaaa",
+        "muallif": 2,
+        "rasm": "",
+        "yaratilgan_sana": "2026-04-08T10:39:50.824Z",
+        "yangilangan_sana": "2026-04-08T10:39:50.824Z",
+        "nashr_etilgan": true,
+        "korildi": 0
+    }
+},
+{
+    "model": "blog.post",
+    "pk": 4,
+    "fields": {
+        "sarlavha": "Odam bo'lish qiyin",
+        "matn": "qqqqqqqqqq",
+        "muallif": 2,
+        "rasm": "",
+        "yaratilgan_sana": "2026-04-08T10:40:16.050Z",
+        "yangilangan_sana": "2026-04-08T10:40:16.050Z",
+        "nashr_etilgan": true,
+        "korildi": 0
+    }
+},
+{
+    "model": "blog.izoh",
+    "pk": 1,
+    "fields": {
+        "post": 1,
+        "muallif": 1,
+        "matn": "cccccccccc",
+        "yaratilgan": "2026-04-08T10:39:10.144Z"
+    }
+},
+{
+    "model": "blog.profil",
+    "pk": 1,
+    "fields": {
+        "foydalanuvchi": 1,
+        "rasm": "profillar/default.jpg",
+        "bio": "",
+        "tugilgan_sana": null,
+        "manzil": ""
+    }
+},
+{
+    "model": "blog.profil",
+    "pk": 2,
+    "fields": {
+        "foydalanuvchi": 2,
+        "rasm": "profillar/default.jpg",
+        "bio": "",
+        "tugilgan_sana": null,
+        "manzil": ""
+    }
+}
+]
