@@ -13,9 +13,9 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('nashr_etilgan', 'yaratilgan_sana')
     search_fields = ('sarlavha', 'matn')
     date_hierarchy = 'yaratilgan_sana'
-    inlines = [IzohInline]   # Izoh inline qo‘shildi
+    inlines = [IzohInline]   
 
-# ====== ProfilAdmin ======
+
 @admin.register(Profil)
 class ProfilAdmin(admin.ModelAdmin):
     list_display = ('foydalanuvchi', 'tugilgan_sana')
