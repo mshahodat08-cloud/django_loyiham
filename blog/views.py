@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 from .models import Post, Profil
 from .forms import FoydalanuvchiYangilashForma, ProfilYangilashForma
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.db import connection
 
 def bosh_sahifa(request):
     postlar_list = Post.objects.select_related('muallif').filter(
@@ -244,3 +246,13 @@ def profil_tahrirlash(request):
         'p_forma': p_forma
     }
     return render(request, 'blog/profil_tahrirlash.html', context)
+
+
+
+def health(request):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+        return JsonResponse({'status': 'ok'})
+    except:
+        return JsonResponse({'status': 'error'}, status=500)

@@ -29,6 +29,7 @@ urlpatterns = [
     path('kategoriya/<int:id>/', views.kategoriya_postlari, name='kategoriya_postlari'),
     path('profil/<str:username>/', views.profil, name='profil'),
     path('profil/tahrirlash/', views.profil_tahrirlash, name='profil_tahrirlash'),
+    path('health/', views.health, name='health'),
 
    
 ]
