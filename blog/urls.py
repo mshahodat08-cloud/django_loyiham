@@ -8,6 +8,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+
+router = DefaultRouter()
+router.register(r'postlar', views.PostViewSet, basename='post')
 
 urlpatterns = [
     path('', views.bosh_sahifa, name='bosh_sahifa'),
@@ -29,7 +35,17 @@ urlpatterns = [
     path('kategoriya/<int:id>/', views.kategoriya_postlari, name='kategoriya_postlari'),
     path('profil/<str:username>/', views.profil, name='profil'),
     path('profil/tahrirlash/', views.profil_tahrirlash, name='profil_tahrirlash'),
-    path('health/', views.health, name='health'),
+    path('api/', include(router.urls)),
+    
+    # API endpoints
+    path('api/postlar/', views.post_list_api, name='post_list_api'),
+    path('api/postlar/<int:post_id>/', views.post_detail_api, name='post_detail_api'),
+    path('api/postlar/<int:post_id>/yangilash/', views.post_update_api, name='post_update_api'),
+    path('api/postlar/<int:post_id>/ochirish/', views.post_delete_api, name='post_delete_api'),
+
+    path('api/kirish/', views.login_api, name='login_api'),
+    path('api/chiqish/', views.logout_api, name='logout_api'),
+    path('api/royxatdan-otish/', views.register_api, name='register_api')
 
    
 ]

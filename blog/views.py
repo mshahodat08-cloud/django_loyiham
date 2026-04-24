@@ -22,6 +22,16 @@ from .forms import FoydalanuvchiYangilashForma, ProfilYangilashForma
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.db import connection
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import PostSerializer
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import action
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 def bosh_sahifa(request):
     postlar_list = Post.objects.select_related('muallif').filter(
@@ -34,7 +44,7 @@ def bosh_sahifa(request):
 
     return render(request, 'blog/bosh.html', {'postlar': postlar})
 
-def biz_haqimizda(request):  # ← Yangi
+def biz_haqimizda(request): 
     return render(request, 'blog/biz_haqimizda.html')
 
 def aloqa(request):
@@ -63,7 +73,7 @@ def post_batafsil(request, post_id):
 def ommabop_postlar(request):
     postlar = Post.objects.filter(
         nashr_etilgan=True
-    ).order_by('-korildi')[:5]  # Eng ko'p ko'rilgan 5 ta
+    ).order_by('-korildi')[:5]  
 
     context = {'postlar': postlar}
     return render(request, 'blog/ommabop.html', context)
@@ -93,7 +103,7 @@ def draft_postlar(request):
 @login_required
 def post_yaratish(request):
     if request.method == 'POST':
-        forma = PostForma(request.POST, request.FILES)  # request.FILES qo'shildi!
+        forma = PostForma(request.POST, request.FILES)  
         if forma.is_valid():
             post = forma.save(commit=False)
             post.muallif = request.user
@@ -191,8 +201,8 @@ def parol_ozgartirish(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():
-            user = form.save()  # Parolni saqlaydi
-            update_session_auth_hash(request, user)  # User sessiyasini yangilaydi
+            user = form.save()  
+            update_session_auth_hash(request, user)  
             messages.success(request, "Parolingiz muvaffaqiyatli o'zgartirildi!")
             return redirect('profil_sahifasi', username=request.user.username)
         else:
@@ -256,3 +266,181 @@ def health(request):
         return JsonResponse({'status': 'ok'})
     except:
         return JsonResponse({'status': 'error'}, status=500)
+    
+
+
+
+
+
+@api_view(['GET'])
+def post_list_api(request):
+    postlar = Post.objects.filter(nashr_etilgan=True).order_by('-yaratilgan_sana')
+    serializer = PostSerializer(postlar, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def post_list_api(request):
+    if request.method == 'GET':
+        postlar = Post.objects.filter(nashr_etilgan=True).order_by('-yaratilgan_sana')
+        serializer = PostSerializer(postlar, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(muallif=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET'])
+def post_detail_api(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id, nashr_etilgan=True)
+    except Post.DoesNotExist:
+        return Response(
+            {'xato': 'Post topilmadi'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    post.korildi += 1
+    post.save()
+
+    serializer = PostSerializer(post)
+    return Response(serializer.data)
+
+
+@api_view(['PUT', 'PATCH'])
+def post_update_api(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        return Response(
+            {'xato': 'Post topilmadi'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    if post.muallif != request.user:
+        return Response(
+            {'xato': 'Ruxsat yo\'q'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    serializer = PostSerializer(post, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def post_delete_api(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        return Response(
+            {'xato': 'Post topilmadi'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    if post.muallif != request.user:
+        return Response(
+            {'xato': 'Ruxsat yo\'q'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    post.delete()
+    return Response(
+        {'xabar': 'Post o\'chirildi'},
+        status=status.HTTP_204_NO_CONTENT
+    )
+
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.filter(nashr_etilgan=True).order_by('-yaratilgan_sana')
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(muallif=self.request.user)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.korildi += 1
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def ommabop(self, request):
+        postlar = Post.objects.filter(nashr_etilgan=True).order_by('-korildi')[:5]
+        serializer = self.get_serializer(postlar, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def mening_postlarim(self, request):
+        if not request.user.is_authenticated:
+            return Response(
+                {'xato': 'Tizimga kirish kerak'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+        postlar = Post.objects.filter(muallif=request.user).order_by('-yaratilgan_sana')
+        serializer = self.get_serializer(postlar, many=True)
+        return Response(serializer.data)
+    
+
+
+@api_view(['POST'])
+def login_api(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(username=username, password=password)
+
+    if user:
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.id,
+            'username': user.username
+        })
+    else:
+        return Response(
+            {'xato': 'Noto\'g\'ri login yoki parol'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
+@api_view(['POST'])
+def logout_api(request):
+    if request.user.is_authenticated:
+        request.user.auth_token.delete()
+        return Response({'xabar': 'Muvaffaqiyatli chiqildi'})
+    return Response(
+        {'xato': 'Tizimga kirilmagan'},
+        status=status.HTTP_400_BAD_REQUEST
+    )
+
+
+@api_view(['POST'])
+def register_api(request):
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if User.objects.filter(username=username).exists():
+        return Response(
+            {'xato': 'Bu username band'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    user = User.objects.create_user(
+        username=username,
+        email=email,
+        password=password
+    )
+
+    token = Token.objects.create(user=user)
+
+    return Response({
+        'token': token.key,
+        'user_id': user.id,
+        'username': user.username
+    }, status=status.HTTP_201_CREATED)
