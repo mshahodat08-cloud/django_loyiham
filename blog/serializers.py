@@ -20,3 +20,5 @@ class PostSerializer(serializers.ModelSerializer):
             'korildi'
         ]
         read_only_fields = ['id', 'yaratilgan_sana', 'yangilangan_sana', 'korildi']
+
+
